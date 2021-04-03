@@ -15,15 +15,16 @@ class IphonereviewPipeline:
         self.curr = self.conn.cursor()
 
     def process_item(self, item, spider):
-        self.curr.execute("insert into reviewDataTable(Title,reviewText,StyleName,Colour,VrfFlag,Rating) values (?,?,?,?,?,?)",(
-            item['ReviewTitle'][0],
-            item['ReviewText'][0],
-            item['StyleName'][0],
-            item['Colour'][0],
-            item['VrfFlag'][0],
-            item['Rating'][0]
+        for i in range(0,len(item)-1):
+            self.curr.execute("insert into reviewDataTable(Title,reviewText,StyleName,Colour,VrfFlag,Rating) values (?,?,?,?,?,?)",(
+                item['ReviewTitle'][i],
+                item['ReviewText'][i],
+                item['StyleName'][i],
+                item['Colour'][i],
+                item['VrfFlag'][i],
+                item['Rating'][i]
 
-        ))
-        self.conn.commit()
+            ))
+            self.conn.commit()
         
         return item

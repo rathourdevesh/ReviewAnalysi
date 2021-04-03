@@ -6,7 +6,7 @@ class iphoneReview(scrapy.Spider):
     start_urls= [
         'https://www.amazon.in/New-Apple-iPhone-12-128GB/product-reviews/B08L5TNJHG/ref=cm_cr_getr_d_paging_btm_prev_1?ie=UTF8&reviewerType=all_reviews&pageNumber='
         ]
-    pageNumber = 1
+    pageNumber = 21
     def parse(self,response):
         items = IphonereviewItem()
         reviewTitle = response.css('.a-text-bold span::text').extract()
@@ -28,7 +28,7 @@ class iphoneReview(scrapy.Spider):
 
         yield items
 
-        # nextpage = 'https://www.amazon.in/s?k=books&page=' + str(iphoneReview.pageNumber) + '&qid=1597588536&ref=sr_pg_2'
-        # if (nextpage <= 4):
-        #     yield response.follow(nextpage , callback = self.parse )
-        #     iphoneReview.pageNumber += 1
+        nextpage = 'https://www.amazon.in/New-Apple-iPhone-12-128GB/product-reviews/B08L5TNJHG/ref=cm_cr_getr_d_paging_btm_prev_1?ie=UTF8&reviewerType=all_reviews&pageNumber=' + str(iphoneReview.pageNumber)
+        if (iphoneReview.pageNumber <= 20):
+            yield response.follow(nextpage , callback = self.parse )
+            iphoneReview.pageNumber += 1
