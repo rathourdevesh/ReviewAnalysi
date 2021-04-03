@@ -13,4 +13,6 @@ class IphonereviewItem(scrapy.Item):
     StyleName = scrapy.Field()
     Colour = scrapy.Field()
     VrfFlag = scrapy.Field()
+    stylenew = scrapy.Field()
+    Rating = scrapy.Field()
     
