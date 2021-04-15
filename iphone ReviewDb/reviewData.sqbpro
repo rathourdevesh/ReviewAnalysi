@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="E:/projects/iphoneReview/reviewData.db" readonly="0" foreign_keys="" case_sensitive_like="" temp_store="" wal_autocheckpoint="" synchronous=""/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="797"/><column_width id="4" width="0"/></tab_structure><tab_browse><current_table name="0,0:"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="Filte_Data_Inserter">insert into FilteredReviewData select Title,replace(replace(replace(replace(reviewText,'&lt;span&gt;',''),'&lt;/span&gt;',''),'&lt;br&gt;',''),'&lt;/br&gt;','') as ReviewText,
+ substr(StyleName,13,5) as Storage,
+ replace(replace(Colour,'Colour: ',''),'(PRODUCT)','') as Colour
+ ,CASE VrfFlag WHEN 'Verified Purchase' THEN '1' 
+else '0' 
+END as VF,
+substr(Rating,1,4) as Rating
+ from reviewDataTable;
+</sql><sql name="Table_creator">-- create table FilteredReviewData  (Title text,
+-- ReviewText Text,
+-- Storage Text,
+-- Colour Text,
+-- VF Text,
+-- Rating NUMERIC);
+Alter table FilteredReviewData modify(ReviewText Text);
+
+
+</sql><sql name="SQL 3">select Title, cast (ReviewText as Text),Storage, 
+                                       Colour ,
+                                       VF ,
+                                       Rating  from FilteredReviewData; </sql><current_tab id="2"/></tab_sql></sqlb_project>
